@@ -23,6 +23,8 @@ def get_conf_interval():
     return (sample_p - margin_of_error, sample_p + margin_of_error)
 
 def check(answer):
+    if answer == quit:
+        exit(0)
     while answer != 'y' and answer != 'n':
         print "I am sorry, I don't understand. Do you know this TLA? [y/n]"
         answer = raw_input('> ')
@@ -59,8 +61,9 @@ def welcome():
     print "the smaller the confidence interval will become as the standard"
     print "error of the mean will become smaller as the sample mean tends"
     print "towards the parametric mean."
+    print "\nTo leave the test at any time, type 'quit'."
     print "\nThis is a self-assessment exercise. We hope that it is useful."
-
+    
 def reset_totals():
     global num_tests
     global num_known
