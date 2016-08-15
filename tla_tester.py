@@ -1,7 +1,7 @@
 import random
 from math import sqrt
 
-LETTERS = map(chr, range(65, 91)) 
+LETTERS = map(chr, range(ord('A'), ord('Z'))) 
 TOTAL_PERMS = len(LETTERS) ** 3
 
 num_tests = 0.0
@@ -14,8 +14,6 @@ def generate():
     return s
     
 def get_conf_interval():
-    global num_known 
-    global num_tests
     sample_p = num_known / num_tests
     CRIT_VALUE = 1.96   #could use scipy to create variable to adjust conf level
     std_error = sqrt((sample_p * (1-sample_p)) / num_tests)
@@ -75,4 +73,5 @@ def start_test():
         test_knowledge()
         display_info()
 
-start_test()
+if __name__ == '__main__':
+    start_test()
