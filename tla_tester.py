@@ -23,9 +23,9 @@ def get_conf_interval():
     return (sample_p - margin_of_error, sample_p + margin_of_error)
 
 def check(answer):
-    if answer == 'quit':
-        exit(0)
     while answer != 'y' and answer != 'n':
+        if answer == 'quit':
+            exit(0)
         print "I am sorry, I don't understand. Do you know this TLA? [y/n]"
         answer = raw_input('> ')
 
@@ -42,9 +42,9 @@ def test_knowledge():
 
 def display_info():
     percentage = num_known/num_tests
-    print "\nYou have %s correct answers out of %s." % (num_known, num_tests) 
-    print "That is %.2f percent correct (to 2dp)." % (percentage * 100)
-    print "You know approximately %s TLAs." % (percentage * TOTAL_PERMS)
+    print "\nYou have %i correct answers out of %i." % (num_known, num_tests) 
+    print "You have got %.2f percent correct (to 2dp)." % (percentage * 100)
+    print "You know approximately %i TLAs." % round(percentage * TOTAL_PERMS)
     if num_tests > 100:
         bounds = [str(int(round(p_bounds*TOTAL_PERMS))) 
             for p_bounds in get_conf_interval()] 
@@ -52,15 +52,13 @@ def display_info():
         print "between " + bounds[0] + " and " + bounds [1] + " TLAs.\n" 
 
 def welcome():
-    print "Welcome to TLA test."
+    print "Welcome to TLA test.\n"
     print "Today we will test how many three letter acronyms (TLAs) you know."
-    print "You will immediately begin to get live feedback on your current "
+    print "\nYou will immediately begin to get live feedback on your current "
     print "correct percentage and the estimated number of TLAs that you know."
-    print "Once you have logged 100 answers we will be able to give an"
+    print "\nOnce you have logged 100 answers we will be able to give an"
     print "approximate 95% confidence interval. The more tests you do, the"
-    print "the smaller the confidence interval will become as the standard"
-    print "error of the mean will become smaller as the sample mean tends"
-    print "towards the parametric mean."
+    print "narrower the interval should become."
     print "\nTo leave the test at any time, type 'quit'."
     print "\nThis is a self-assessment exercise. We hope that it is useful."
     
