@@ -40,13 +40,14 @@ def test_knowledge():
 
 def display_info():
     percentage = num_known/num_tests
-    print "You have %s correct answers out of %s." % (num_known, num_tests) 
+    print "\nYou have %s correct answers out of %s." % (num_known, num_tests) 
     print "That is %.2f percent correct (to 2dp)." % (percentage * 100)
     print "You know approximately %s TLAs." % (percentage * TOTAL_PERMS)
     if num_tests > 9:
-        bounds= [p_bounds*TOTAL_PERMS for p_bounds in get_conf_interval()] 
-        print "We are 95% confident you know between %s and %s TLAs." % (
-                int(round(bounds[0])), int(round(bounds[1]))) 
+        bounds = [str(int(round(p_bounds*TOTAL_PERMS))) 
+            for p_bounds in get_conf_interval()] 
+        print "\nWe are 95% confident that you know "
+        print "between " + bounds[0] + " and " + bounds [1] + " TLAs.\n" 
 
 def welcome():
     print "Welcome to TLA test."
