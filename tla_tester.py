@@ -23,7 +23,7 @@ def get_conf_interval():
     return (sample_p - margin_of_error, sample_p + margin_of_error)
 
 def check(answer):
-    if answer == quit:
+    if answer == 'quit':
         exit(0)
     while answer != 'y' and answer != 'n':
         print "I am sorry, I don't understand. Do you know this TLA? [y/n]"

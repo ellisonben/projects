@@ -61,8 +61,9 @@ def welcome():
     print "the smaller the confidence interval will become as the standard"
     print "error of the mean will become smaller as the sample mean tends"
     print "towards the parametric mean."
+    print "\nTo leave the test at any time, type 'quit'."
     print "\nThis is a self-assessment exercise. We hope that it is useful."
-
+    
 def reset_totals():
     global num_tests
     global num_known
