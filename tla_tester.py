@@ -45,7 +45,7 @@ def display_info():
     print "\nYou have %s correct answers out of %s." % (num_known, num_tests) 
     print "That is %.2f percent correct (to 2dp)." % (percentage * 100)
     print "You know approximately %s TLAs." % (percentage * TOTAL_PERMS)
-    if num_tests > 9:
+    if num_tests > 100:
         bounds = [str(int(round(p_bounds*TOTAL_PERMS))) 
             for p_bounds in get_conf_interval()] 
         print "\nWe are 95% confident that you know "
