@@ -4,16 +4,13 @@ from math import sqrt
 LETTERS = map(chr, range(ord('A'), ord('Z'))) 
 TOTAL_PERMS = len(LETTERS) ** 3
 
-num_tests = 0.0
-num_known = 0.0
-
 def generate():
     s = ""
     for i in range(3):
         s += random.choice(LETTERS)
     return s
     
-def get_conf_interval():
+def get_conf_interval(num_known, num_tests):
     sample_p = num_known / num_tests
     CRIT_VALUE = 1.96   #could use scipy to create variable to adjust conf level
     std_error = sqrt((sample_p * (1-sample_p)) / num_tests)
@@ -27,9 +24,7 @@ def check(answer):
         print "I am sorry, I don't understand. Do you know this TLA? [y/n]"
         answer = raw_input('> ')
 
-def test_knowledge():
-    global num_tests
-    global num_known
+def test_knowledge(num_known, num_tests):
     num_tests += 1
     print "Do you know this TLA? [y/n]"
     print generate()
@@ -37,15 +32,16 @@ def test_knowledge():
     check(answer)
     if answer == 'y':
         num_known += 1
+    return num_known, num_tests
 
-def display_info():
+def display_info(num_known, num_tests):
     percentage = num_known/num_tests
     print "\nYou have %i correct answers out of %i." % (num_known, num_tests) 
     print "You have got %.2f percent correct (to 2dp)." % (percentage * 100)
     print "You know approximately %i TLAs." % round(percentage * TOTAL_PERMS)
     if num_tests > 100:
         bounds = [str(int(round(p_bounds*TOTAL_PERMS))) 
-            for p_bounds in get_conf_interval()] 
+            for p_bounds in get_conf_interval(num_known, num_tests)] 
         print "\nWe are 95% confident that you know "
         print "between " + bounds[0] + " and " + bounds [1] + " TLAs.\n" 
 
@@ -60,18 +56,13 @@ def welcome():
     print "\nTo leave the test at any time, type 'quit'."
     print "\nThis is a self-assessment exercise. We hope that it is useful."
     
-def reset_totals():
-    global num_tests
-    global num_known
-    num_tests = 0.0
-    num_known = 0.0
-
 def start_test():
     welcome()
-    reset_totals()
+    num_tests = 0.0
+    num_known = 0.0
     while True:
-        test_knowledge()
-        display_info()
+        num_known, num_tests = test_knowledge(num_known, num_tests)
+        display_info(num_known, num_tests)
 
 if __name__ == '__main__':
     start_test()
