@@ -2,13 +2,13 @@ import random
 
 deck = []
 
-suits = ["Hearts", "Diamonds", "Spades", "Clubs"]
-names = [["Two", 2], ["Three", 3], ["Four", 4], ["Five", 5],
+SUITS = ["Hearts", "Diamonds", "Spades", "Clubs"]
+NAMES = [["Two", 2], ["Three", 3], ["Four", 4], ["Five", 5],
         ["Six", 6], ["Seven", 7], ["Eight", 8], ["Nine", 9],
         ["Ten", 10], ["Jack", 10], ["Queen", 10], ["King", 10], ["Ace", 11]]
 
 winnings = 0
-stake = 10
+STAKE = 10
 
 print "Welcome to Blackjack." 
 print "Dealer will hit on soft 17 and blackjack pays 3 for 2."
@@ -21,8 +21,8 @@ while deck_number != '6' and deck_number != '8':
 deck_number = int(deck_number)
 
 for i in range(deck_number):
-    for suit in suits:
-        for name in names:
+    for suit in SUITS:
+        for name in NAMES:
             deck.append([suit, name])
 
 random.shuffle(deck)

@@ -27,9 +27,13 @@ def is_full(board):
     return True 
 
 def display(board):
-    print "\n\t\t" + board[0][0] + " " + board[0][1] + " " + board[0][2]
-    print "\t\t" + board[1][0] + " " + board[1][1] + " " + board[1][2]
-    print "\t\t" + board[2][0] + " " + board[2][1] + " " + board[2][2] + "\n"
+    v = " | "
+    m = "\t\t"
+    print "\n" + m + board[0][0] + v + board[0][1] + v + board[0][2]
+    print m + "---------"
+    print m + board[1][0] + v + board[1][1] + v + board[1][2]
+    print m + "---------"
+    print m + board[2][0] + v + board[2][1] + v + board[2][2] + "\n"
 
 def check_validity(move, board):
     moves = {
@@ -84,7 +88,7 @@ def change_player(player):
 def explain():
     print "The grid has nine numbered spaces: "    
     display(explain_board())
-    print "Crosses to play first.\n"
+    print "X to play first.\n"
     
 def tic_tac_toe():
     explain()
